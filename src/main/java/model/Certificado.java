@@ -5,36 +5,22 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Certificado {
+    private UUID idCertificado;
     protected String tipo;
     protected String codigoDeValidacao;
     protected LocalDate data;
-    private UUID idCertificado;
     protected Usuario usuario;
     protected Evento evento;
-    protected ArrayList<Trabalho> trabalhos;
+    protected Trabalho trabalhoAvaliado;
 
-    public Certificado(String tipo, String codigoDeValidacao, LocalDate data) {
+    public Certificado(String tipo, String codigoDeValidacao, LocalDate data, Usuario usuario, Evento evento, Trabalho trabalhoAvaliado) {
+        this.idCertificado = UUID.randomUUID();
         this.tipo = tipo;
         this.codigoDeValidacao = codigoDeValidacao;
-        this.data = data;
-    }
-
-    public Certificado(String tipo, String codigoDeValidacao, LocalDate data, Evento evento) {
-        this.tipo = tipo;
-        this.codigoDeValidacao = codigoDeValidacao;
-        this.data = data;
-        this.evento = evento;
-    }
-
-    public Certificado(LocalDate data, Usuario usuario, String codigoDeValidacao, String tipo) {
         this.data = data;
         this.usuario = usuario;
-        this.codigoDeValidacao = codigoDeValidacao;
-        this.tipo = tipo;
-    }
-
-    public Certificado() {
-        this.idCertificado = UUID.randomUUID();
+        this.evento = evento;
+        this.trabalhoAvaliado = trabalhoAvaliado;
     }
 
     public Certificado(String tipo, String codigoDeValidacao, LocalDate data, Usuario usuario, Evento evento) {
@@ -44,6 +30,10 @@ public class Certificado {
         this.data = data;
         this.usuario = usuario;
         this.evento = evento;
+    }
+
+    public Certificado() {
+        this.idCertificado = UUID.randomUUID();
     }
 
     public String getTipo() {
@@ -58,12 +48,12 @@ public class Certificado {
         this.tipo = tipo;
     }
 
-    public ArrayList<Trabalho> getTrabalhos() {
-        return trabalhos;
+    public Trabalho getTrabalhoAvaliado() {
+        return trabalhoAvaliado;
     }
 
-    public void setTrabalhos(ArrayList<Trabalho> trabalhos) {
-        this.trabalhos = trabalhos;
+    public void setTrabalhoAvaliado(Trabalho trabalhoAvaliado) {
+        this.trabalhoAvaliado = trabalhoAvaliado;
     }
 
     public String getCodigoDeValidacao() {

@@ -12,24 +12,34 @@ public class Evento {
     protected String nome;
     protected String descricao;
     protected LocalDate data;
-    protected Endereco endereco;
-    protected Integer capacidade;
+    protected Endereco local;
+    protected Integer capacidadeMax;
+    protected Integer capacidadeAtual;
     protected LocalDateTime periodoSubmissao;
+    protected Usuario organizador;
     protected ArrayList<Inscricao> inscricoes;
     protected ArrayList<Certificado> certificados;
+    protected ArrayList<Usuario> avaliadores;
+    protected ArrayList<Trabalho> trabalhos;
 
     public Evento() {
         this.idEvento = UUID.randomUUID();
     }
 
-    public Evento(String nome, String descricao, LocalDate data, Endereco endereco, Integer capacidade, LocalDateTime periodoSubmissao) {
+    public Evento(String nome, String descricao, LocalDate data, Endereco local, Integer capacidadeMax, Integer capacidadeAtual, LocalDateTime periodoSubmissao, Usuario organizador, ArrayList<Inscricao> inscricoes, ArrayList<Certificado> certificados, ArrayList<Usuario> avaliadores, ArrayList<Trabalho> trabalhos) {
         this.idEvento = UUID.randomUUID();
         this.nome = nome;
         this.descricao = descricao;
         this.data = data;
-        this.endereco = endereco;
-        this.capacidade = capacidade;
+        this.local = local;
+        this.capacidadeMax = capacidadeMax;
+        this.capacidadeAtual = capacidadeAtual;
         this.periodoSubmissao = periodoSubmissao;
+        this.organizador = organizador;
+        this.inscricoes = inscricoes;
+        this.certificados = certificados;
+        this.avaliadores = avaliadores;
+        this.trabalhos = trabalhos;
     }
 
     public ArrayList<Inscricao> getInscricoes() {
@@ -68,20 +78,52 @@ public class Evento {
         this.data = data;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public Endereco getLocal() {
+        return local;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public ArrayList<Usuario> getAvaliadores() {
+        return avaliadores;
     }
 
-    public Integer getCapacidade() {
-        return capacidade;
+    public void setAvaliadores(ArrayList<Usuario> avaliadores) {
+        this.avaliadores = avaliadores;
     }
 
-    public void setCapacidade(Integer capacidade) {
-        this.capacidade = capacidade;
+    public void setLocal(Endereco local) {
+        this.local = local;
+    }
+
+    public Integer getCapacidadeMax() {
+        return capacidadeMax;
+    }
+
+    public void setCapacidadeMax(Integer capacidadeMax) {
+        this.capacidadeMax = capacidadeMax;
+    }
+
+    public Integer getCapacidadeAtual() {
+        return capacidadeAtual;
+    }
+
+    public void setCapacidadeAtual(Integer capacidadeAtual) {
+        this.capacidadeAtual = capacidadeAtual;
+    }
+
+    public Usuario getOrganizador() {
+        return organizador;
+    }
+
+    public void setOrganizador(Usuario organizador) {
+        this.organizador = organizador;
+    }
+
+    public ArrayList<Trabalho> getTrabalhos() {
+        return trabalhos;
+    }
+
+    public void setTrabalhos(ArrayList<Trabalho> trabalhos) {
+        this.trabalhos = trabalhos;
     }
 
     public LocalDateTime getPeriodoSubmissao() {

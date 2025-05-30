@@ -7,13 +7,37 @@ public class Usuario {
     private UUID idUsuario;
     protected String nomeCompleto;
     protected String email;
-    protected String role;
     protected ArrayList<Inscricao> inscricoes;
     protected ArrayList<Trabalho> trabalhos;
     protected ArrayList<Certificado> certificados;
+    protected ArrayList<Evento> eventosOrganizados;
+    protected ArrayList<Avaliacao> avalicoesFeitas;
 
     public Usuario() {
         this.idUsuario = UUID.randomUUID();
+    }
+
+    public Usuario(String nomeCompleto, String email, ArrayList<Inscricao> inscricoes, ArrayList<Trabalho> trabalhos, ArrayList<Certificado> certificados) {
+        this.idUsuario = UUID.randomUUID();
+        this.nomeCompleto = nomeCompleto;
+        this.email = email;
+        this.inscricoes = inscricoes;
+        this.trabalhos = trabalhos;
+        this.certificados = certificados;
+    }
+
+    public Usuario(String nomeCompleto, String email, ArrayList<Inscricao> inscricoes, ArrayList<Certificado> certificados) {
+        this.idUsuario = UUID.randomUUID();
+        this.nomeCompleto = nomeCompleto;
+        this.email = email;
+        this.inscricoes = inscricoes;
+        this.certificados = certificados;
+    }
+
+    public Usuario(String nomeCompleto, String email) {
+        this.idUsuario = UUID.randomUUID();
+        this.nomeCompleto = nomeCompleto;
+        this.email = email;
     }
 
     public ArrayList<Inscricao> getInscricoes() {
@@ -22,13 +46,6 @@ public class Usuario {
 
     public void setInscricoes(ArrayList<Inscricao> inscricoes) {
         this.inscricoes = inscricoes;
-    }
-
-    public Usuario(String nomeCompleto, String email, String role) {
-        this.idUsuario = UUID.randomUUID();
-        this.nomeCompleto = nomeCompleto;
-        this.email = email;
-        this.role = role;
     }
 
     public ArrayList<Trabalho> getTrabalhos() {
@@ -59,16 +76,24 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public ArrayList<Certificado> getCertificados() {
         return certificados;
+    }
+
+    public ArrayList<Evento> getEventosOrganizados() {
+        return eventosOrganizados;
+    }
+
+    public void setEventosOrganizados(ArrayList<Evento> eventosOrganizados) {
+        this.eventosOrganizados = eventosOrganizados;
+    }
+
+    public ArrayList<Avaliacao> getAvalicoesFeitas() {
+        return avalicoesFeitas;
+    }
+
+    public void setAvalicoesFeitas(ArrayList<Avaliacao> avalicoesFeitas) {
+        this.avalicoesFeitas = avalicoesFeitas;
     }
 
     public void setCertificados(ArrayList<Certificado> certificados) {
