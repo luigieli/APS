@@ -10,17 +10,17 @@ public class TrabalhoRepository implements RepositoryTemplate<Trabalho>{
     private ArrayList<Trabalho> trabalhos;
 
     public TrabalhoRepository() {
-        trabalhos = new ArrayList<>();
+        this.trabalhos = new ArrayList<>();
     }
 
     @Override
     public ArrayList<Trabalho> getAll() {
-        return trabalhos;
+        return this.trabalhos;
     }
 
     @Override
     public Boolean delete(UUID id) {
-        trabalhos.removeIf(t -> {
+        this.trabalhos.removeIf(t -> {
             return t.getIdTrabalho().equals(id);
         });
         return false;
@@ -28,7 +28,7 @@ public class TrabalhoRepository implements RepositoryTemplate<Trabalho>{
 
     @Override
     public Optional<Trabalho> update(Trabalho trabalho){
-        var trabalhoOptional = trabalhos.stream()
+        var trabalhoOptional = this.trabalhos.stream()
                 .filter(t -> t.getIdTrabalho().equals(trabalho.getIdTrabalho()))
                 .findFirst();
         if(trabalhoOptional.isEmpty()) return Optional.empty();
@@ -39,13 +39,13 @@ public class TrabalhoRepository implements RepositoryTemplate<Trabalho>{
 
     @Override
     public Optional<Trabalho> getById(UUID id) {
-        return trabalhos.stream()
+        return this.trabalhos.stream()
                 .filter(t -> t.getIdTrabalho().equals(id))
                 .findFirst();
     }
 
     @Override
     public Boolean create(Trabalho trabalho) {
-        return trabalhos.add(trabalho);
+        return this.trabalhos.add(trabalho);
     }
 }
