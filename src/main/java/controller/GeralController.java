@@ -26,10 +26,18 @@ public class GeralController {
         var choice = interfaceGeral.renderHomeLoggedScreenView();
         switch (choice){
             case 1 -> {
+                new EventoController().getAllEvents();
+            }
+            case 2 -> {
+                try{
+                    new EventoController().createEvent();
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+            }
+            case 3 -> {
 
             }
-            case 2 -> {}
-            case 3 -> {}
             case 4 -> {}
             case 5 -> {}
             case 6 -> {}
