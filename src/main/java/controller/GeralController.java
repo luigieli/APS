@@ -36,7 +36,7 @@ public class GeralController {
                 }
             }
             case 3 -> {
-
+                new EventoController().getAllMyEvents();
             }
             case 4 -> {}
             case 5 -> {}

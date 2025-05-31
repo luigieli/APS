@@ -9,7 +9,6 @@ import view.EventoVisao;
 import view.GeralVisao;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class EventoController {
 
@@ -25,7 +24,7 @@ public class EventoController {
     }
 
     public void viewEvent(Evento evento){
-        var choice = new EventoVisao().renderViewEvent(evento);
+        var choice = new EventoVisao().renderEventView(evento);
         switch (choice){
             case 0 -> getAllEvents();
             case 1 -> {
@@ -54,7 +53,7 @@ public class EventoController {
     }
 
     public void createEvent() throws Exception{
-        var eventoBuilder = new EventoVisao().renderCreateEvent();
+        var eventoBuilder = new EventoVisao().renderCreateEventView();
         var evento = new Evento((String)eventoBuilder.get(0),
                 (String) eventoBuilder.get(1),
                 (LocalDate) eventoBuilder.get(2),
@@ -78,14 +77,19 @@ public class EventoController {
 
     }
 
+    public void setAppraiserToEvent(Evento evento) throws Exception{
+        var appraiseEmail = new EventoVisao().renderSelecteAppraiserView(evento);
+        new EventoService().addAppraiserToEvent(evento, appraiseEmail);
+    }
+
     public void updateEvent(Evento evento) throws Exception{
-        var choices = new EventoVisao().renderUpdateEvent(evento);
+        var choices = new EventoVisao().renderUpdateEventView(evento);
         var eventoUpdated = new EventoService().updateEvent(choices,evento);
         if(eventoUpdated.isEmpty()) throw new Exception("Evento não encontrado.");
     }
 
     public void viewMyEvent(Evento evento){
-        var choice = new EventoVisao().renderViewMyEvent(evento);
+        var choice = new EventoVisao().renderMyEventView(evento);
         switch (choice){
             case 0 -> getAllMyEvents();
             case 1 -> {
@@ -93,7 +97,12 @@ public class EventoController {
                 getAllMyEvents();
             }
             case 2 -> {
-                //TODO: DESIGNAR AVALIADOR
+                try{
+                    setAppraiserToEvent(evento);
+                    getAllMyEvents();
+                }catch (Exception e){
+                    e.getMessage(); // TODO: AVALIADOR NÃO ENCONTRADO
+                }
             }
             case 3 -> {
                 try{

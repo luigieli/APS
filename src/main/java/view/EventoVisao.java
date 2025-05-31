@@ -41,7 +41,7 @@ public class EventoVisao extends TemplateVisao{
         return eventos.get(choice-1);
     }
 
-    public Integer renderViewEvent(Evento evento){
+    public Integer renderEventView(Evento evento){
         System.out.println("###################################");
         System.out.println("-----------------------------------");
         System.out.println("Nome: " + evento.getNome());
@@ -64,7 +64,7 @@ public class EventoVisao extends TemplateVisao{
         return scanner.nextInt();
     }
 
-    public ArrayList<Object> renderCreateEvent(){
+    public ArrayList<Object> renderCreateEventView(){
         System.out.println("###################################");
         System.out.println("Insira o nome do evento: ");
         var nome = scanner.next();
@@ -132,7 +132,7 @@ public class EventoVisao extends TemplateVisao{
         return eventos.get(choice-1);
     }
 
-    public Integer renderViewMyEvent(Evento evento){
+    public Integer renderMyEventView(Evento evento){
         System.out.println("###################################");
         System.out.println("-----------------------------------");
         System.out.println("Nome: " + evento.getNome());
@@ -154,7 +154,7 @@ public class EventoVisao extends TemplateVisao{
         return scanner.nextInt();
     }
 
-    public HashMap<String,String> renderUpdateEvent(Evento evento){
+    public HashMap<String,String> renderUpdateEventView(Evento evento){
         HashMap<String, String> choice = new HashMap<>();
         Integer option;
         String optionChosen;
@@ -230,5 +230,13 @@ public class EventoVisao extends TemplateVisao{
             else if (option == 0) break;
         }
         return choice;
+    }
+
+    public String renderSelecteAppraiserView(Evento evento){
+        System.out.println("###################################");
+        System.out.println("Designar avaliador para evento: " + evento.getNome());
+        System.out.println("###################################");
+        System.out.println("Insira o email do avaliador: ");
+        return scanner.nextLine().toUpperCase();
     }
 }

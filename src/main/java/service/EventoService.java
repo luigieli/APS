@@ -4,6 +4,7 @@ import app.Database;
 import model.Evento;
 import model.Usuario;
 import repository.EventoRepository;
+import repository.UsuarioRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,9 +15,11 @@ import java.util.UUID;
 
 public class EventoService {
     private EventoRepository eventoRepository;
+    private UsuarioRepository usuarioRepository;
 
     public EventoService() {
         this.eventoRepository = Database.getInstance().getEventoRepository();
+        this.usuarioRepository = Database.getInstance().getUsuarioRepository();
     }
 
     public ArrayList<Evento> getAllEvents(){
@@ -81,5 +84,16 @@ public class EventoService {
         }
 
         return eventoRepository.update(evento);
+    }
+
+    public Boolean addAppraiserToEvent(Evento evento, String appraiserEmail) throws Exception{
+        var appraiserOptional = usuarioRepository.getByEmail(appraiserEmail);
+        if(appraiserOptional.isEmpty()){
+            throw new Exception("Avaliador não encontrado.");
+        }
+        var appraiserFound = appraiserOptional.get();
+        evento.getAvaliadores().add(appraiserFound);
+        eventoRepository.update(evento);
+        return true;
     }
 }

@@ -49,7 +49,7 @@ public class UsuarioRepository implements RepositoryTemplate<Usuario> {
 
     public Optional<Usuario> getByEmail(String email){
         var usuarioOptional = this.usuarios.stream()
-                .filter(u -> u.getEmail().equals(email))
+                .filter(u -> u.getEmail().equalsIgnoreCase(email))
                 .findFirst();
         if(usuarioOptional.isEmpty()) return Optional.empty();
         var usuarioFound = usuarioOptional.get();
