@@ -78,6 +78,12 @@ public class EventoController {
 
     }
 
+    public void updateEvent(Evento evento) throws Exception{
+        var choices = new EventoVisao().renderUpdateEvent(evento);
+        var eventoUpdated = new EventoService().updateEvent(choices,evento);
+        if(eventoUpdated.isEmpty()) throw new Exception("Evento não encontrado.");
+    }
+
     public void viewMyEvent(Evento evento){
         var choice = new EventoVisao().renderViewMyEvent(evento);
         switch (choice){
@@ -88,6 +94,14 @@ public class EventoController {
             }
             case 2 -> {
                 //TODO: DESIGNAR AVALIADOR
+            }
+            case 3 -> {
+                try{
+                    updateEvent(evento);
+                    getAllMyEvents();
+                }catch (Exception e){
+                   e.getMessage(); // TODO: EVENTO NÃO ENCONTRADO
+                }
             }
         }
     }

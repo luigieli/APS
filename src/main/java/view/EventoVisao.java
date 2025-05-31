@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class EventoVisao extends TemplateVisao{
     public EventoVisao() {
@@ -151,5 +152,83 @@ public class EventoVisao extends TemplateVisao{
         System.out.println("###################################");
         System.out.print("Selecione a opção desejada: ");
         return scanner.nextInt();
+    }
+
+    public HashMap<String,String> renderUpdateEvent(Evento evento){
+        HashMap<String, String> choice = new HashMap<>();
+        Integer option;
+        String optionChosen;
+        while (true){
+            System.out.println("###################################");
+            System.out.println("-----------------------------------");
+            System.out.println("Nome: " + (choice.containsKey("nome") ? choice.get("nome") : evento.getNome()));
+            System.out.println("Descrição: " +  (choice.containsKey("descricao") ? choice.get("descricao") : evento.getDescricao()));
+            System.out.println("Limite máximo: " +  (choice.containsKey("quantidade") ? choice.get("quantidade") : evento.getCapacidadeMax()));
+            System.out.println("Data de inicio do evento: " +  (choice.containsKey("dataInicio") ? choice.get("dataInicio"):  evento.getDataInicio()));
+            System.out.println("Data de fim do evento: " +  (choice.containsKey("dataFim") ? choice.get("dataFIm"):  evento.getDataInicio()));
+            System.out.println("Perído de submissão: " +  (choice.containsKey("prazoSubmissao") ? choice.get("prazoSubmissao") : evento.getPeriodoSubmissao()));
+            System.out.println("CEP:" +  (choice.containsKey("cep") ? choice.get("cep"):  evento.getLocal().getCep()));
+            System.out.println("UF:" +  (choice.containsKey("uf") ? choice.get("uf"):  evento.getLocal().getUf()));
+            System.out.println("Cidade:" +  (choice.containsKey("cidade") ? choice.get("cidade"):  evento.getLocal().getCidade()));
+            System.out.println("Bairro:" +  (choice.containsKey("bairro") ? choice.get("bairro"):  evento.getLocal().getBairro()));
+            System.out.println("Rua:" +  (choice.containsKey("rua") ? choice.get("rua"):  evento.getLocal().getRua()));
+            System.out.println("Número:" +  (choice.containsKey("numero") ? choice.get("numero"):  evento.getLocal().getNumero()));
+            System.out.println("-----------------------------------");
+            System.out.println("1 -  Alterar nome do evento: ");
+            System.out.println("2 -  Alterar descrição do evento: ");
+            System.out.println("3 -  Alterar quantidade máxima de participantes: ");
+            System.out.println("4 -  Alterar data de início do evento (DD/MM/YYYY): ");
+            System.out.println("5 -  Alterar data de término do evento (DD/MM/YYYY): ");
+            System.out.println("6 -  Alterar prazo máximo para submeter trabalhos (DD/MM/YYYY): ");
+            System.out.println("7 -  Alterar CEP de onde será o evento: ");
+            System.out.println("8 -  Alterar UF de onde será o evento: ");
+            System.out.println("9 -  Alterar cidade de onde será o evento: ");
+            System.out.println("10 - Alterar bairro de onde será o evento: ");
+            System.out.println("11 - Alterar rua de onde será o evento: ");
+            System.out.println("12 - Alterar número do logradouro de onde será o evento: ");
+            System.out.println("###################################");
+            System.out.println("Digite o número do campo que deseja alterar: (0 - para SAIR)");
+            option = scanner.nextInt();
+            System.out.println("Digite o novo valor do campo: ");
+            optionChosen = scanner.nextLine();
+            if(option == 1){
+                choice.put("nome",optionChosen);
+            }
+            else if(option == 2){
+                choice.put("descricao",optionChosen);
+            }
+            else if(option == 3){
+                choice.put("quantidade",optionChosen);
+            }
+            else if(option == 4){
+                choice.put("dataInicio",optionChosen);
+            }
+            else if(option == 5){
+                choice.put("dataFim",optionChosen);
+            }
+            else if(option == 6){
+                choice.put("prazoSubmissao",optionChosen);
+            }
+            else if(option == 7){
+                choice.put("cep",optionChosen);
+            }
+            else if(option == 8){
+                choice.put("uf",optionChosen);
+            }
+            else if(option == 9){
+                choice.put("cidade",optionChosen);
+            }
+            else if(option == 10){
+                choice.put("bairro",optionChosen);
+            }
+            else if(option == 11){
+                choice.put("rua",optionChosen);
+            }
+            else if(option == 12){
+                choice.put("Numero",optionChosen);
+            }
+            else if (option == 0) break;
+        }
+        return choice;
     }
 }
