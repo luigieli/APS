@@ -1,6 +1,7 @@
 package service;
 
 import app.Database;
+import app.Session;
 import model.Evento;
 import model.Inscricao;
 import model.Trabalho;
@@ -16,9 +17,9 @@ public class TrabalhoService {
         this.trabalhoRepository = Database.getInstance().getTrabalhoRepository();
     }
 
-    public Boolean createTrabalho(Trabalho trabalho, Evento evento, Usuario usuario) throws Exception{
+    public Boolean createTrabalho(Trabalho trabalho, Evento evento) throws Exception{
         if(LocalDate.now().isAfter(evento.getPeriodoSubmissao())) throw new Exception("Período de submissão dos trabalhos já encerrou.");
-        var inscricaoOptional = usuario.getInscricoes().stream()
+        var inscricaoOptional = Session.getUsuarioInstance().getInscricoes().stream()
                 .filter(i -> i.getEvento().getIdEvento().equals(evento.getIdEvento()))
                 .findFirst();
         if(inscricaoOptional.isEmpty()) throw new Exception("Você não está inscrito para o evento: " + evento.getNome());
