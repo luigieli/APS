@@ -2,6 +2,7 @@ package view;
 
 import model.Evento;
 import model.Inscricao;
+import model.Trabalho;
 import subtypes.Endereco;
 
 import java.time.LocalDate;
@@ -232,11 +233,27 @@ public class EventoVisao extends TemplateVisao{
         return choice;
     }
 
-    public String renderSelecteAppraiserView(Evento evento){
+    public String renderSelectAppraiserView(Evento evento){
         System.out.println("###################################");
         System.out.println("Designar avaliador para evento: " + evento.getNome());
         System.out.println("###################################");
         System.out.println("Insira o email do avaliador: ");
         return scanner.nextLine().toUpperCase();
+    }
+
+    public Trabalho renderGetAllWorksView(Evento evento){
+        System.out.println("###################################");
+        for(int i=0; i < evento.getTrabalhos().size(); i++){
+            System.out.println("-----------------------------------");
+            System.out.println((i+1) + " - Titulo do trabalho: " + evento.getTrabalhos().get(i).getTitulo());
+            System.out.println("Tipo do trabalho: " + evento.getTrabalhos().get(i).getTipo());
+            System.out.println("Arquivo: " + evento.getTrabalhos().get(i).getArquivo());
+            System.out.println("-----------------------------------");
+        }
+        System.out.println("0 - SAIR");
+        System.out.println("###################################");
+        var choice = scanner.nextInt();
+        if(choice == 0) return null;
+        return evento.getTrabalhos().get(choice-1);
     }
 }

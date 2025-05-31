@@ -49,6 +49,14 @@ public class EventoController {
                     // TODO: TRATAR ESTAR LOGADO PARA CANCELAR INSCRIÇÃO
                 }
             }
+            case 4 -> {
+                try{
+                    new UsuarioController().registrarAvaliacao(evento);
+                    getAllEvents();
+                }catch (Exception e){
+                    e.getMessage(); //TODO: TRATAR ESTAR LOGADO PARA AVALIAR TRABALHOS
+                }
+            }
         }
     }
 
@@ -78,7 +86,7 @@ public class EventoController {
     }
 
     public void setAppraiserToEvent(Evento evento) throws Exception{
-        var appraiseEmail = new EventoVisao().renderSelecteAppraiserView(evento);
+        var appraiseEmail = new EventoVisao().renderSelectAppraiserView(evento);
         new EventoService().addAppraiserToEvent(evento, appraiseEmail);
     }
 

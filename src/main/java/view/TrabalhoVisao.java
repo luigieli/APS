@@ -1,5 +1,7 @@
 package view;
 
+import model.Trabalho;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,4 +23,17 @@ public class TrabalhoVisao extends TemplateVisao{
         var tipo = scanner.next();
         return (ArrayList<String>) Arrays.asList(titulo, tipo, url);
     }
+
+    public ArrayList<Object> renderSetAvaliacao(Trabalho trabalho){
+        System.out.println("###################################");
+        System.out.println("Avaliação de Trabalho");
+        System.out.println("Trabalho: " + trabalho.getTitulo());
+        System.out.println("###################################");
+        System.out.println("Insira o seu comentário: ");
+        var comment = scanner.nextLine();
+        System.out.println("Insira sua nota (ex: 4.6): ");
+        Double nota = scanner.nextDouble();
+        return new ArrayList<>(Arrays.asList(comment,nota));
+    }
+
 }
