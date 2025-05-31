@@ -15,7 +15,7 @@ public class Evento {
     protected Endereco local;
     protected Integer capacidadeMax;
     protected Integer capacidadeAtual;
-    protected LocalDateTime periodoSubmissao;
+    protected LocalDate periodoSubmissao;
     protected Usuario organizador;
     protected ArrayList<Inscricao> inscricoes;
     protected ArrayList<Certificado> certificados;
@@ -26,7 +26,7 @@ public class Evento {
         this.idEvento = UUID.randomUUID();
     }
 
-    public Evento(String nome, String descricao, LocalDate data, Endereco local, Integer capacidadeMax, Integer capacidadeAtual, LocalDateTime periodoSubmissao, Usuario organizador, ArrayList<Inscricao> inscricoes, ArrayList<Certificado> certificados, ArrayList<Usuario> avaliadores, ArrayList<Trabalho> trabalhos) {
+    public Evento(String nome, String descricao, LocalDate data, Endereco local, Integer capacidadeMax, Integer capacidadeAtual, LocalDate periodoSubmissao, Usuario organizador, ArrayList<Inscricao> inscricoes, ArrayList<Certificado> certificados, ArrayList<Usuario> avaliadores, ArrayList<Trabalho> trabalhos) {
         this.idEvento = UUID.randomUUID();
         this.nome = nome;
         this.descricao = descricao;
@@ -126,11 +126,11 @@ public class Evento {
         this.trabalhos = trabalhos;
     }
 
-    public LocalDateTime getPeriodoSubmissao() {
+    public LocalDate getPeriodoSubmissao() {
         return periodoSubmissao;
     }
 
-    public void setPeriodoSubmissao(LocalDateTime periodoSubmissao) {
+    public void setPeriodoSubmissao(LocalDate periodoSubmissao) {
         this.periodoSubmissao = periodoSubmissao;
     }
 

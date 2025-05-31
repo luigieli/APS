@@ -13,14 +13,14 @@ public class Trabalho {
     protected URL arquivo;
     protected ArrayList<Avaliacao> avaliacoes;
     protected Evento evento;
-    protected ArrayList<Inscricao> inscricoes;
+    protected Inscricao inscricao;
     protected ArrayList<Certificado> certificados;
 
     public Trabalho() {
         this.idTrabalho = UUID.randomUUID();
     }
 
-    public Trabalho(String titulo, String tipo, String status, URL arquivo, ArrayList<Avaliacao> avaliacoes, Evento evento, ArrayList<Inscricao> inscricoes, ArrayList<Certificado> certificados) {
+    public Trabalho(String titulo, String tipo, String status, URL arquivo, ArrayList<Avaliacao> avaliacoes, Evento evento, Inscricao inscricao, ArrayList<Certificado> certificados) {
         this.idTrabalho = UUID.randomUUID();
         this.titulo = titulo;
         this.tipo = tipo;
@@ -28,8 +28,15 @@ public class Trabalho {
         this.arquivo = arquivo;
         this.avaliacoes = avaliacoes;
         this.evento = evento;
-        this.inscricoes = inscricoes;
+        this.inscricao = inscricao;
         this.certificados = certificados;
+    }
+
+    public Trabalho(String titulo, String tipo, URL arquivo) {
+        this.idTrabalho = UUID.randomUUID();
+        this.titulo = titulo;
+        this.tipo = tipo;
+        this.arquivo = arquivo;
     }
 
     public Evento getEvento() {
@@ -40,12 +47,12 @@ public class Trabalho {
         this.evento = evento;
     }
 
-    public ArrayList<Inscricao> getInscricoes() {
-        return inscricoes;
+    public Inscricao getInscricao() {
+        return inscricao;
     }
 
-    public void setInscricoes(ArrayList<Inscricao> inscricoes) {
-        this.inscricoes = inscricoes;
+    public void setInscricao(Inscricao inscricao) {
+        this.inscricao = inscricao;
     }
 
     public ArrayList<Avaliacao> getAvaliacoes() {
