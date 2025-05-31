@@ -1,0 +1,42 @@
+package controller;
+
+import view.GeralVisao;
+
+public class GeralController {
+    private GeralVisao interfaceGeral;
+    public GeralController() {
+        interfaceGeral = new GeralVisao();
+    }
+
+    public void homeScreen(){
+        var choice = interfaceGeral.renderHomeView();
+
+        if(choice == 1){
+            new UsuarioController().login();
+        }else if(choice == 2){
+            new UsuarioController().cadastrar();
+        }else{
+            System.out.println("COMANDO INVÁLIDO!!!");
+            homeScreen();
+        }
+
+    }
+
+    public void loggedHomeScreen(){
+        var choice = interfaceGeral.renderHomeLoggedScreenView();
+        switch (choice){
+            case 1 -> {
+
+            }
+            case 2 -> {}
+            case 3 -> {}
+            case 4 -> {}
+            case 5 -> {}
+            case 6 -> {}
+            case 7 -> {}
+            case 8 -> {}
+        }
+    }
+
+
+}
