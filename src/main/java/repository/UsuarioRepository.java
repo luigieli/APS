@@ -46,4 +46,13 @@ public class UsuarioRepository implements RepositoryTemplate<Usuario> {
     public Boolean create(Usuario usuario) {
         return this.usuarios.add(usuario);
     }
+
+    public Optional<Usuario> getByEmail(String email){
+        var usuarioOptional = this.usuarios.stream()
+                .filter(u -> u.getEmail().equals(email))
+                .findFirst();
+        if(usuarioOptional.isEmpty()) return Optional.empty();
+        var usuarioFound = usuarioOptional.get();
+        return Optional.of(usuarioFound);
+    }
 }
