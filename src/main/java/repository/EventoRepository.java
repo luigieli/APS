@@ -5,6 +5,7 @@ import model.Evento;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class EventoRepository implements RepositoryTemplate<Evento> {
     private ArrayList<Evento> eventos;
@@ -44,5 +45,11 @@ public class EventoRepository implements RepositoryTemplate<Evento> {
     @Override
     public Boolean create(Evento evento) {
         return this.eventos.add(evento);
+    }
+
+    public ArrayList<Evento> getAllEventsByOrganizer(UUID idOrganizador){
+        return (ArrayList<Evento>) this.eventos.stream()
+                .filter(e -> e.getOrganizador().getIdUsuario().equals(idOrganizador))
+                .collect(Collectors.toList());
     }
 }
