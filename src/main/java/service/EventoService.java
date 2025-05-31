@@ -1,8 +1,8 @@
 package service;
 
 import app.Database;
-import app.Session;
 import model.Evento;
+import model.Usuario;
 import repository.EventoRepository;
 
 import java.util.ArrayList;
@@ -16,11 +16,20 @@ public class EventoService {
         this.eventoRepository = Database.getInstance().getEventoRepository();
     }
 
-    public ArrayList<Evento> GetAllEvents(){
+    public ArrayList<Evento> getAllEvents(){
         return eventoRepository.getAll();
     }
 
     public Optional<Evento> getEvent(UUID id){
         return eventoRepository.getById(id);
+    }
+
+    public Boolean createEvent(Usuario usuario, Evento evento){
+        evento.setOrganizador(usuario);
+        return eventoRepository.create(evento);
+    }
+
+    public ArrayList<Evento> getAllMyEvents(UUID userId){
+        return eventoRepository.getAllEventsByOrganizer(userId);
     }
 }
