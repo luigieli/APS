@@ -118,7 +118,7 @@ public class EventoVisao extends TemplateVisao{
             System.out.println("-----------------------------------");
         }
         System.out.println("###################################");
-        System.out.println("Insira os índices de cada participante presente (separado por espaço): ");
+        System.out.println("Insira os índices de cada participante presente (separado por espaço): (0 - SAIR)");
         return scanner.nextLine();
     }
 

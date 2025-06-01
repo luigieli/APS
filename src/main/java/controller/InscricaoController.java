@@ -16,7 +16,7 @@ public class InscricaoController {
     public void lancarPresenca(Evento evento) {
         ArrayList<Inscricao> inscritos = new InscricaoService().visualizarInscritosNoEvento(evento);
         var input = new EventoVisao().renderSubscribedView(inscritos);
-
+        if(input.equals("0")) return;
         ArrayList<Integer> indicesPresentes = (ArrayList<Integer>) Arrays.stream(input.split(" "))
                 .map(a -> (Integer.parseInt(a) - 1))
                 .collect(Collectors.toList());
