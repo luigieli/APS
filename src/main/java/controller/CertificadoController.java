@@ -12,21 +12,25 @@ public class CertificadoController {
 
     public void getParticipationCertificate(){
         try{
-            var eventos = new EventoService().getAllEventsWithPresenceCertified(Session.getUsuarioInstance());
+            var eventos = new EventoService().getAllEventsWithPresenceCertified(Session.getLoggedInUsuario());
             var eventoPresent = new CertificadoVisao().renderAllSubscribedEventsPresentView(eventos);
-            new CertificadoService().generatePresenceCertificate(eventoPresent, Session.getUsuarioInstance());
+            if(eventoPresent == null) return;
+            var certificado = new CertificadoService().generatePresenceCertificate(eventoPresent, Session.getLoggedInUsuario());
+            new CertificadoVisao().renderCertificatePresence(certificado);
         }catch (Exception e){
-            e.getMessage(); // TODO: PRECISA ESTAR LOGADO PARA GERAR CERTIFICADO
+            System.err.println(e.getMessage());
         }
     }
 
     public void getWorkApresentationCertificate(){
         try{
-            var trabalhos = new TrabalhoService().getAllTrabalhosMadeByMe(Session.getUsuarioInstance());
+            var trabalhos = new TrabalhoService().getAllTrabalhosMadeByMe(Session.getLoggedInUsuario());
             var trabalhoChosen = new CertificadoVisao().renderAllWorksShowView(trabalhos);
-            new CertificadoService().generateWorkShowCertificate(trabalhoChosen,trabalhoChosen.getEvento(),Session.getUsuarioInstance());
+            if (trabalhoChosen == null) return;
+            var certificado = new CertificadoService().generateWorkShowCertificate(trabalhoChosen,trabalhoChosen.getEvento(),Session.getLoggedInUsuario());
+            new CertificadoVisao().renderCertificateWorkShow(certificado);
         }catch (Exception e){
-            e.getMessage(); // TODO: PRECISA ESTAR LOGADO PARA GERAR CERTIFICADO
+            System.err.println(e.getMessage());
         }
     }
 }

@@ -1,7 +1,10 @@
 package repository;
 
 import model.Evento;
+import model.Usuario;
+import subtypes.Endereco;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;

@@ -19,7 +19,7 @@ public class EventoController {
     public void getAllEvents(){
         var eventos = new EventoService().getAllEvents();
         var evento = new EventoVisao().renderAllEvents(eventos);
-        if(evento == null) new GeralVisao().renderHomeLoggedScreenView();
+        if(evento == null) return;
         viewEvent(evento);
     }
 
@@ -29,10 +29,10 @@ public class EventoController {
             case 0 -> getAllEvents();
             case 1 -> {
                 try{
-                    new InscricaoService().realizarInscricao(evento, Session.getUsuarioInstance());
+                    new InscricaoService().realizarInscricao(evento, Session.getLoggedInUsuario());
                     getAllEvents();
                 }catch (Exception e){
-                     e.getMessage(); // TODO: TRATAR EXIBIÇÃO DE MENSAGENS DE ERRO NA INTERFACE
+                    System.err.println(e.getMessage()); // TODO: TRATAR EXIBIÇÃO DE MENSAGENS DE ERRO NA INTERFACE
                      viewEvent(evento);
                 }
             }
@@ -42,20 +42,15 @@ public class EventoController {
             }
             case 3 -> {
                 try{
-                   new InscricaoService().cancelarInscricao(evento, Session.getUsuarioInstance());
+                   new InscricaoService().cancelarInscricao(evento, Session.getLoggedInUsuario());
                    getAllEvents();
                 }catch (Exception e){
-                    e.getMessage();
-                    // TODO: TRATAR ESTAR LOGADO PARA CANCELAR INSCRIÇÃO
+                    System.err.println(e.getMessage()); // TODO: TRATAR ESTAR LOGADO PARA CANCELAR INSCRIÇÃO
                 }
             }
             case 4 -> {
-                try{
-                    new UsuarioController().registrarAvaliacao(evento);
-                    getAllEvents();
-                }catch (Exception e){
-                    e.getMessage(); //TODO: TRATAR ESTAR LOGADO PARA AVALIAR TRABALHOS
-                }
+                new UsuarioController().registrarAvaliacao(evento);
+                getAllEvents();
             }
         }
     }
@@ -68,19 +63,20 @@ public class EventoController {
                 (LocalDate) eventoBuilder.get(3),
                 (Endereco) eventoBuilder.get(4),
                 (Integer) eventoBuilder.get(5),
-                (LocalDate) eventoBuilder.get(6)
+                (LocalDate) eventoBuilder.get(6),
+                (Integer) eventoBuilder.get(7)
         );
-        new EventoService().createEvent(Session.getUsuarioInstance(),evento);
+        new EventoService().createEvent(Session.getLoggedInUsuario(),evento);
     }
 
     public void getAllMyEvents(){
         try{
-            var myEvents = new EventoService().getAllMyEvents(Session.getUsuarioInstance().getIdUsuario());
+            var myEvents = new EventoService().getAllMyEvents(Session.getLoggedInUsuario().getIdUsuario());
             var eventoChosen = new EventoVisao().renderMyEventsView(myEvents);
-            if(eventoChosen == null) new GeralVisao().renderHomeLoggedScreenView();
+            if(eventoChosen == null) return;
             viewMyEvent(eventoChosen);
         }catch (Exception e){
-           e.getMessage(); // TODO USUÁRIO PRECISA ESTAR LOGADO PARA GERENCIAR SEUS PRÓPRIOS EVENTOS
+            System.err.println(e.getMessage()); // TODO USUÁRIO PRECISA ESTAR LOGADO PARA GERENCIAR SEUS PRÓPRIOS EVENTOS
         }
 
     }
@@ -109,7 +105,7 @@ public class EventoController {
                     setAppraiserToEvent(evento);
                     getAllMyEvents();
                 }catch (Exception e){
-                    e.getMessage(); // TODO: AVALIADOR NÃO ENCONTRADO
+                    System.err.println(e.getMessage()); // TODO: AVALIADOR NÃO ENCONTRADO
                 }
             }
             case 3 -> {
@@ -117,7 +113,7 @@ public class EventoController {
                     updateEvent(evento);
                     getAllMyEvents();
                 }catch (Exception e){
-                   e.getMessage(); // TODO: EVENTO NÃO ENCONTRADO
+                    System.err.println(e.getMessage()); // TODO: EVENTO NÃO ENCONTRADO
                 }
             }
         }

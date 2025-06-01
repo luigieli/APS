@@ -1,7 +1,6 @@
 package controller;
 
 import app.Session;
-import model.Avaliacao;
 import model.Evento;
 import service.AvaliacaoService;
 import service.UsuarioService;
@@ -16,23 +15,27 @@ public class UsuarioController {
 
     public void login(){
         String email = "";
-        do{
-            email = new UsuarioVisao().renderLoginView();
-        }while (!new UsuarioService().login(email));
-
+        email = new UsuarioVisao().renderLoginView();
+        var usuarioOptional = new UsuarioService().login(email);
+        if(usuarioOptional.isEmpty()) {
+            login();
+            return;
+        }
+        var usuario = usuarioOptional.get();
+        Session.getInstance().login(usuario);
     }
 
     public void cadastrar(){
-
+        var inputs = new UsuarioVisao().renderCadastrarView();
+        new UsuarioService().cadastrar(inputs);
     }
 
-    public void registrarAvaliacao(Evento evento) throws Exception{
+    public void registrarAvaliacao(Evento evento) {
         var trabalhoChosen = new EventoVisao().renderGetAllWorksView(evento);
         if(trabalhoChosen == null){
-            new GeralVisao().renderHomeLoggedScreenView();
             return;
         }
         var input = new TrabalhoVisao().renderSetAvaliacao(trabalhoChosen);
-        new AvaliacaoService().addAvaliacaoToWork(trabalhoChosen, input, Session.getUsuarioInstance());
+        new AvaliacaoService().addAvaliacaoToWork(trabalhoChosen, input, Session.getLoggedInUsuario());
     }
 }

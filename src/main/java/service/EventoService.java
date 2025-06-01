@@ -68,6 +68,10 @@ public class EventoService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             evento.setDataInicio(LocalDate.parse(changes.get("prazoSubmissao"),formatter));
         }
+        if(changes.containsKey("prazoCancelarInscricao")){
+            int daysCancelar = Integer.parseInt(changes.get("prazoCancelarInscricao"));
+            evento.setDiasCancelarInscricao(daysCancelar);
+        }
         if(changes.containsKey("cep")){
             evento.getLocal().setCep(changes.get("cep"));
         }
