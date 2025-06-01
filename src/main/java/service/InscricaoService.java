@@ -25,6 +25,10 @@ public class InscricaoService {
 
     public Boolean realizarInscricao(Evento evento, Usuario usuario) throws Exception{
         if(evento.getCapacidadeAtual() >= (evento.getCapacidadeMax())) throw new Exception("Capacidade máxima atingida.");
+        var eventoJaInscrito = usuario.getInscricoes().stream()
+                .filter(i -> i.getEvento().getIdEvento().equals(evento.getIdEvento()))
+                .findFirst();
+        if(eventoJaInscrito.isPresent()) throw new Exception("Você já se inscreveu para esse evento");
         var data = LocalDate.now();
         if(data.isAfter(evento.getDataInicio())) throw new Exception("Prazo para inscrição já acabou.");
         Inscricao inscricao = new Inscricao(
