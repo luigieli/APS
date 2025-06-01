@@ -2,8 +2,10 @@ package service;
 
 import app.Database;
 import model.Evento;
+import model.Inscricao;
 import model.Usuario;
 import repository.EventoRepository;
+import repository.InscricaoRepository;
 import repository.UsuarioRepository;
 
 import java.time.LocalDate;
@@ -12,14 +14,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class EventoService {
     private EventoRepository eventoRepository;
     private UsuarioRepository usuarioRepository;
+    private InscricaoRepository inscricaoRepository;
 
     public EventoService() {
         this.eventoRepository = Database.getInstance().getEventoRepository();
         this.usuarioRepository = Database.getInstance().getUsuarioRepository();
+        this.inscricaoRepository = Database.getInstance().getInscricaoRepository();
     }
 
     public ArrayList<Evento> getAllEvents(){
@@ -96,4 +101,11 @@ public class EventoService {
         eventoRepository.update(evento);
         return true;
     }
+
+    public ArrayList<Evento> getAllEventsWithPresenceCertified(Usuario usuario){
+        var inscricoes = inscricaoRepository.getAllUserInscricoesByPresence(usuario.getIdUsuario());
+        return (ArrayList<Evento>) inscricoes.stream().map(Inscricao::getEvento).collect(Collectors.toList());
+    }
+
+
 }

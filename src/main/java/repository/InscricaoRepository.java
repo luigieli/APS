@@ -61,4 +61,10 @@ public class InscricaoRepository implements RepositoryTemplate<Inscricao> {
         return (ArrayList<Inscricao>) inscricoes.stream().filter(i -> i.getEvento().getIdEvento().equals(eventoId))
                 .collect(Collectors.toList());
     }
+
+    public ArrayList<Inscricao> getAllUserInscricoesByPresence(UUID userId){
+        return (ArrayList<Inscricao>) this.inscricoes.stream()
+                .filter(i -> i.getStatus().equals("PRESENTE") && i.getUsuario().getIdUsuario().equals(userId))
+                .collect(Collectors.toList());
+    }
 }
