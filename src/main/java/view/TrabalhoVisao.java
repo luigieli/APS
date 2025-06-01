@@ -16,13 +16,12 @@ public class TrabalhoVisao extends TemplateVisao{
         System.out.println("###################################");
         System.out.println("Submissão de Trabalho");
         System.out.println("###################################");
-        System.out.println("Insira o URL do trabalho: ");
-        var url = scanner.next();
-        scanner.nextLine();
         System.out.println("Insira o título do trabalho: ");
         var titulo = scanner.nextLine();
         System.out.println("Insira o tipo de trabalho: ");
         var tipo = scanner.nextLine();
+        System.out.println("Insira o URL do trabalho: ");
+        var url = scanner.nextLine();
         return new ArrayList<>(Arrays.asList(titulo, tipo, url));
     }
 
@@ -36,6 +35,7 @@ public class TrabalhoVisao extends TemplateVisao{
         var comment = scanner.nextLine();
         System.out.println("Insira sua nota (ex: 4.6): ");
         Double nota = scanner.nextDouble();
+        scanner.nextLine();
         return new ArrayList<>(Arrays.asList(comment,nota));
     }
 

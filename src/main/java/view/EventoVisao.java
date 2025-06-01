@@ -25,12 +25,13 @@ public class EventoVisao extends TemplateVisao{
             System.out.println("Opção: " + ((int)i+1));
             System.out.println("Nome: " + eventos.get(i).getNome());
             System.out.println("Descrição: " + eventos.get(i).getDescricao());
-            System.out.println("Data de início do evento: " + eventos.get(i).getDataInicio());
-            System.out.println("Data de término do evento: " + eventos.get(i).getDataFim());
-            System.out.println("Local:" + eventos.get(i).getLocal());
-            System.out.println("Perído de submissão: " + eventos.get(i).getPeriodoSubmissao());
+            System.out.println("Data de início do evento: " + eventos.get(i).getDataInicio().format(dateFormatter));
+            System.out.println("Data de término do evento: " + eventos.get(i).getDataFim().format(dateFormatter));
+            System.out.println("Local:" + '\n' + eventos.get(i).getLocal());
+            System.out.println("Perído de submissão: " + eventos.get(i).getPeriodoSubmissao().format(dateFormatter));
             System.out.println("Número de inscritos: " + eventos.get(i).getCapacidadeAtual() + " | "
                     + "Limite máximo: " + eventos.get(i).getCapacidadeMax());
+            System.out.println("Organizador: " + eventos.get(i).getOrganizador().getNomeCompleto());
             System.out.println("-----------------------------------");
         }
         System.out.println("0 - VOLTAR.");
@@ -49,11 +50,13 @@ public class EventoVisao extends TemplateVisao{
         System.out.println("-----------------------------------");
         System.out.println("Nome: " + evento.getNome());
         System.out.println("Descrição: " + evento.getDescricao());
-        System.out.println("Data do evento: " + evento.getDataInicio());
-        System.out.println("Local:" + evento.getLocal());
-        System.out.println("Perído de submissão: " + evento.getPeriodoSubmissao());
+        System.out.println("Data do evento: " + evento.getDataInicio().format(dateFormatter));
+        System.out.println("Data de término: " + evento.getDataFim().format(dateFormatter));
+        System.out.println("Local:" + '\n' + evento.getLocal());
+        System.out.println("Perído de submissão: " + evento.getPeriodoSubmissao().format(dateFormatter));
         System.out.println("Número de inscritos: " + evento.getCapacidadeAtual() + " | "
                 + "Limite máximo: " + evento.getCapacidadeMax());
+        System.out.println("Organizador: " + evento.getOrganizador().getNomeCompleto());
         System.out.println("-----------------------------------");
         System.out.println("###################################");
         System.out.println();
@@ -80,14 +83,13 @@ public class EventoVisao extends TemplateVisao{
         scanner.nextLine();
         System.out.println("Insira a data de início do evento (DD/MM/YYYY): ");
         var dataInicioStr = scanner.nextLine();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        var dataInicio = LocalDate.parse(dataInicioStr,formatter);
+        var dataInicio = LocalDate.parse(dataInicioStr,dateFormatter);
         System.out.println("Insira a data de término do evento (DD/MM/YYYY): ");
         var dataFimStr = scanner.nextLine();
-        var dataFim = LocalDate.parse(dataFimStr,formatter);
+        var dataFim = LocalDate.parse(dataFimStr,dateFormatter);
         System.out.println("Insira o prazo máximo para submeter trabalhos (DD/MM/YYYY): ");
         var dataTrabStr = scanner.nextLine();
-        var dataTrab = LocalDate.parse(dataTrabStr, formatter);
+        var dataTrab = LocalDate.parse(dataTrabStr, dateFormatter);
         System.out.println("Insira o CEP de onde será o evento: ");
         var cep = scanner.nextLine();
         System.out.println("Insira a UF de onde será o evento: ");
@@ -127,11 +129,13 @@ public class EventoVisao extends TemplateVisao{
             System.out.println("-----------------------------------");
             System.out.println((i + 1) + " - Nome: " + eventos.get(i).getNome());
             System.out.println("Descrição: " + eventos.get(i).getDescricao());
-            System.out.println("Data do evento: " + eventos.get(i).getDataInicio());
-            System.out.println("Local:" + eventos.get(i).getLocal());
-            System.out.println("Perído de submissão: " + eventos.get(i).getPeriodoSubmissao());
+            System.out.println("Data de início evento: " + eventos.get(i).getDataInicio().format(dateFormatter));
+            System.out.println("Data de término: " + eventos.get(i).getDataFim().format(dateFormatter));
+            System.out.println("Local:" + '\n' + eventos.get(i).getLocal());
+            System.out.println("Perído de submissão: " + eventos.get(i).getPeriodoSubmissao().format(dateFormatter));
             System.out.println("Número de inscritos: " + eventos.get(i).getCapacidadeAtual() + " | "
                     + "Limite máximo: " + eventos.get(i).getCapacidadeMax());
+            System.out.println("Organizador: " + eventos.get(i).getOrganizador().getNomeCompleto());
             System.out.println("-----------------------------------");
         }
         System.out.println("###################################");
@@ -147,11 +151,13 @@ public class EventoVisao extends TemplateVisao{
         System.out.println("-----------------------------------");
         System.out.println("Nome: " + evento.getNome());
         System.out.println("Descrição: " + evento.getDescricao());
-        System.out.println("Data do evento: " + evento.getDataInicio());
-        System.out.println("Local:" + evento.getLocal());
+        System.out.println("Data de início evento: " + evento.getDataInicio().format(dateFormatter));
+        System.out.println("Data de término: " + evento.getDataFim().format(dateFormatter));
+        System.out.println("Local:" + '\n' + evento.getLocal());
         System.out.println("Perído de submissão: " + evento.getPeriodoSubmissao());
         System.out.println("Número de inscritos: " + evento.getCapacidadeAtual() + " | "
                 + "Limite máximo: " + evento.getCapacidadeMax());
+        System.out.println("Organizador: " + evento.getOrganizador().getNomeCompleto());
         System.out.println("-----------------------------------");
         System.out.println("###################################");
         System.out.println();
@@ -178,7 +184,7 @@ public class EventoVisao extends TemplateVisao{
             System.out.println("Limite máximo: " +  (choice.containsKey("quantidade") ? choice.get("quantidade") : evento.getCapacidadeMax()));
             System.out.println("Data de inicio do evento: " +  (choice.containsKey("dataInicio") ? choice.get("dataInicio"):  evento.getDataInicio()));
             System.out.println("Data de fim do evento: " +  (choice.containsKey("dataFim") ? choice.get("dataFIm"):  evento.getDataInicio()));
-            System.out.println("Perído de submissão: " +  (choice.containsKey("prazoSubmissao") ? choice.get("prazoSubmissao") : evento.getPeriodoSubmissao()));
+            System.out.println("Perído de submissão de trabalhos: " +  (choice.containsKey("prazoSubmissao") ? choice.get("prazoSubmissao") : evento.getPeriodoSubmissao()));
             System.out.println("CEP:" +  (choice.containsKey("cep") ? choice.get("cep"):  evento.getLocal().getCep()));
             System.out.println("UF:" +  (choice.containsKey("uf") ? choice.get("uf"):  evento.getLocal().getUf()));
             System.out.println("Cidade:" +  (choice.containsKey("cidade") ? choice.get("cidade"):  evento.getLocal().getCidade()));
