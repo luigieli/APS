@@ -26,17 +26,19 @@ public class CertificadoService {
         return UUID.randomUUID().toString();
     }
 
-    public Boolean generatePresenceCertificate(Evento evento, Usuario usuario){
+    public Certificado generatePresenceCertificate(Evento evento, Usuario usuario){
         Certificado certificado = new Certificado("PRESENÇA", generateCertifyCode(), evento.getDataInicio(), usuario, evento);
         usuario.getCertificados().add(certificado);
         usuarioRepository.update(usuario);
-        return certificadoRepository.create(certificado);
+        certificadoRepository.create(certificado);
+        return certificado;
     }
 
-    public Boolean generateWorkShowCertificate(Trabalho trabalho, Evento evento, Usuario usuario){
+    public Certificado generateWorkShowCertificate(Trabalho trabalho, Evento evento, Usuario usuario){
         Certificado certificado = new Certificado("APRESENTAÇÃO",generateCertifyCode(),evento.getDataInicio(),usuario,evento,trabalho);
         trabalho.getCertificados().add(certificado);
         trabalhoRepository.update(trabalho);
-        return certificadoRepository.create(certificado);
+        certificadoRepository.create(certificado);
+        return certificado;
     }
 }

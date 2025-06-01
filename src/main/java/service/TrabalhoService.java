@@ -5,6 +5,8 @@ import app.Session;
 import model.Evento;
 import model.Trabalho;
 import model.Usuario;
+import repository.EventoRepository;
+import repository.InscricaoRepository;
 import repository.TrabalhoRepository;
 
 import java.time.LocalDate;
@@ -12,9 +14,13 @@ import java.util.ArrayList;
 
 public class TrabalhoService {
     private TrabalhoRepository trabalhoRepository;
+    private EventoRepository eventoRepository;
+    private InscricaoRepository inscricaoRepository;
 
     public TrabalhoService() {
         this.trabalhoRepository = Database.getInstance().getTrabalhoRepository();
+        this.eventoRepository = Database.getInstance().getEventoRepository();
+        this.inscricaoRepository = Database.getInstance().getInscricaoRepository();
     }
 
     public Boolean createTrabalho(Trabalho trabalho, Evento evento) throws Exception{
@@ -27,6 +33,10 @@ public class TrabalhoService {
         trabalho.setEvento(evento);
         trabalho.setInscricao(inscricaoFound);
         trabalho.setStatus("SUBMETIDO");
+        evento.getTrabalhos().add(trabalho);
+        inscricaoFound.setTrabalho(trabalho);
+        inscricaoRepository.update(inscricaoFound);
+        eventoRepository.update(evento);
         return trabalhoRepository.create(trabalho);
     }
 

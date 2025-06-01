@@ -30,7 +30,7 @@ public class UsuarioController {
         new UsuarioService().cadastrar(inputs);
     }
 
-    public void registrarAvaliacao(Evento evento) throws Exception{
+    public void registrarAvaliacao(Evento evento) {
         var trabalhoChosen = new EventoVisao().renderGetAllWorksView(evento);
         if(trabalhoChosen == null){
             return;

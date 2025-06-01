@@ -294,6 +294,7 @@ public class EventoVisao extends TemplateVisao{
         }
         System.out.println("0 - SAIR");
         System.out.println("###################################");
+        System.out.println("Insira o evento para avaliar:");
         var choice = scanner.nextInt();
         if(choice == 0) return null;
         return evento.getTrabalhos().get(choice-1);

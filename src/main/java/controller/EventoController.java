@@ -49,12 +49,8 @@ public class EventoController {
                 }
             }
             case 4 -> {
-                try{
-                    new UsuarioController().registrarAvaliacao(evento);
-                    getAllEvents();
-                }catch (Exception e){
-                    System.err.println(e.getMessage()); //TODO: TRATAR ESTAR LOGADO PARA AVALIAR TRABALHOS
-                }
+                new UsuarioController().registrarAvaliacao(evento);
+                getAllEvents();
             }
         }
     }

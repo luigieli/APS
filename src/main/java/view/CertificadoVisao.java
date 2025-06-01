@@ -1,5 +1,6 @@
 package view;
 
+import model.Certificado;
 import model.Evento;
 import model.Trabalho;
 
@@ -43,5 +44,27 @@ public class CertificadoVisao extends GeralVisao{
         scanner.nextLine();
         if(choice==0) return null;
         return trabalhos.get(choice-1);
+    }
+
+    public void renderCertificatePresence(Certificado certificado){
+        clearScreen();
+        System.out.println("-----------------------------------");
+        System.out.println("Evento: " + certificado.getEvento().getNome());
+        System.out.println("Data do evento: " + certificado.getData());
+        System.out.println("Código de validação: " + certificado.getCodigoDeValidacao());
+        System.out.println("Nome do participante: " + certificado.getUsuario().getNomeCompleto());
+        System.out.println("-----------------------------------");
+    }
+
+    public void renderCertificateWorkShow(Certificado certificado){
+        clearScreen();
+        System.out.println("-----------------------------------");
+        System.out.println("Evento: " + certificado.getEvento().getNome());
+        System.out.println("Data do evento: " + certificado.getData());
+        System.out.println("Código de validação: " + certificado.getCodigoDeValidacao());
+        System.out.println("Trabalho apresentado: " + certificado.getTrabalhoAvaliado().getTipo());
+        System.out.println("Tipo de trabalho apresentado: " + certificado.getTrabalhoAvaliado().getTipo());
+        System.out.println("Nome do participante: " + certificado.getUsuario().getNomeCompleto());
+        System.out.println("-----------------------------------");
     }
 }
