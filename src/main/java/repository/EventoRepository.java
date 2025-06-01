@@ -1,7 +1,10 @@
 package repository;
 
 import model.Evento;
+import model.Usuario;
+import subtypes.Endereco;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
@@ -12,6 +15,24 @@ public class EventoRepository implements RepositoryTemplate<Evento> {
 
     public EventoRepository() {
         this.eventos = new ArrayList<>();
+
+        // Endereço
+        Endereco endereco = new Endereco(123, "Rua das Flores", "São Paulo", "Centro", "SP", "01000-000");
+
+        // Usuário
+        Usuario usuario = new Usuario("João da Silva", "joao@email.com", "Universidade XYZ");
+
+        Evento evento = new Evento(
+                "Congresso de Computação",
+                "Evento sobre temas atuais em computação",
+                LocalDate.of(2025, 10, 1),
+                LocalDate.of(2025, 10, 5),
+                endereco,
+                100,
+                LocalDate.of(2025, 8, 1),
+                usuario
+        );
+        eventos.add(evento);
     }
 
     @Override

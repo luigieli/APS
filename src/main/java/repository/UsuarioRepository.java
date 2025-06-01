@@ -11,6 +11,9 @@ public class UsuarioRepository implements RepositoryTemplate<Usuario> {
 
     public UsuarioRepository() {
         this.usuarios = new ArrayList<>();
+
+        Usuario usuario = new Usuario("João da Silva", "joao@email.com", "Universidade XYZ");
+        usuarios.add(usuario);
     }
 
     @Override

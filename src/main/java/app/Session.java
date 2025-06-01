@@ -3,32 +3,29 @@ package app;
 import model.Usuario;
 
 public class Session {
-    private static Usuario usuario;
+    private static Usuario loggedInUsuario;
+    private static Session instance;
 
 
-    public static Usuario getInstance(Usuario usuario) {
-        if (usuario == null) {
-            Session.usuario = usuario;
+    private Session() {
+        // Private constructor
+    }
+    public static Session getInstance() {
+        if (instance == null) {
+            instance = new Session();
         }
-        return Session.usuario;
+        return instance;
     }
 
-    public static Usuario getUsuarioInstance() throws Exception{
+    public void login(Usuario usuario) {
         if (usuario == null) {
-            throw new Exception("Você não está logado.");
+            throw new IllegalArgumentException("Usuário não pode ser nulo para login.");
         }
-        return Session.usuario;
+        Session.loggedInUsuario = usuario;
     }
 
-    public Session(Usuario usuario) {
-        Session.usuario = usuario;
+    public static Usuario getLoggedInUsuario() {
+        return loggedInUsuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        Session.usuario = usuario;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
 }

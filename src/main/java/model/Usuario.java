@@ -7,6 +7,7 @@ public class Usuario {
     private UUID idUsuario;
     protected String nomeCompleto;
     protected String email;
+    protected String instituicao;
     protected ArrayList<Inscricao> inscricoes;
     protected ArrayList<Trabalho> trabalhos;
     protected ArrayList<Certificado> certificados;
@@ -34,9 +35,10 @@ public class Usuario {
         this.certificados = certificados;
     }
 
-    public Usuario(String nomeCompleto, String email) {
+    public Usuario(String nomeCompleto, String email, String instituicao) {
         this.idUsuario = UUID.randomUUID();
         this.nomeCompleto = nomeCompleto;
+        this.instituicao = instituicao;
         this.email = email;
     }
 
