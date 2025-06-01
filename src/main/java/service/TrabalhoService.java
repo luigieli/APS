@@ -19,7 +19,7 @@ public class TrabalhoService {
 
     public Boolean createTrabalho(Trabalho trabalho, Evento evento) throws Exception{
         if(LocalDate.now().isAfter(evento.getPeriodoSubmissao())) throw new Exception("Período de submissão dos trabalhos já encerrou.");
-        var inscricaoOptional = Session.getUsuarioInstance().getInscricoes().stream()
+        var inscricaoOptional = Session.getLoggedInUsuario().getInscricoes().stream()
                 .filter(i -> i.getEvento().getIdEvento().equals(evento.getIdEvento()))
                 .findFirst();
         if(inscricaoOptional.isEmpty()) throw new Exception("Você não está inscrito para o evento: " + evento.getNome());
