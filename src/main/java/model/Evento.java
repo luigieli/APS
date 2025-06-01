@@ -3,6 +3,7 @@ package model;
 import subtypes.Endereco;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -17,6 +18,7 @@ public class Evento {
     protected Integer capacidadeAtual;
     protected LocalDate periodoSubmissao;
     protected Usuario organizador;
+    protected Integer diasCancelarInscricao;
     protected ArrayList<Inscricao> inscricoes;
     protected ArrayList<Usuario> avaliadores;
     protected ArrayList<Trabalho> trabalhos;
@@ -25,7 +27,7 @@ public class Evento {
         this.idEvento = UUID.randomUUID();
     }
 
-    public Evento(String nome, String descricao, LocalDate dataInicio, LocalDate dataFim, Endereco local, Integer capacidadeMax, LocalDate periodoSubmissao, Usuario organizador) {
+    public Evento(String nome, String descricao, LocalDate dataInicio, LocalDate dataFim, Endereco local, Integer capacidadeMax, LocalDate periodoSubmissao, Usuario organizador, Integer diasCancelarInscricao) {
         this.idEvento = UUID.randomUUID();
         this.nome = nome;
         this.descricao = descricao;
@@ -36,12 +38,13 @@ public class Evento {
         this.capacidadeAtual = 0;
         this.periodoSubmissao = periodoSubmissao;
         this.organizador = organizador;
+        this.diasCancelarInscricao = diasCancelarInscricao;
         this.inscricoes = new ArrayList<>();
         this.avaliadores = new ArrayList<>();
         this.trabalhos = new ArrayList<>();
     }
 
-    public Evento(String nome, String descricao, LocalDate dataInicio, LocalDate dataFim, Endereco local, Integer capacidadeMax, LocalDate periodoSubmissao) {
+    public Evento(String nome, String descricao, LocalDate dataInicio, LocalDate dataFim, Endereco local, Integer capacidadeMax, LocalDate periodoSubmissao, Integer diasCancelarInscricao) {
         this.idEvento = UUID.randomUUID();
         this.nome = nome;
         this.descricao = descricao;
@@ -51,6 +54,7 @@ public class Evento {
         this.capacidadeMax = capacidadeMax;
         this.capacidadeAtual = 0;
         this.periodoSubmissao = periodoSubmissao;
+        this.diasCancelarInscricao = diasCancelarInscricao;
         this.inscricoes = new ArrayList<>();
         this.avaliadores = new ArrayList<>();
         this.trabalhos = new ArrayList<>();
@@ -138,6 +142,14 @@ public class Evento {
 
     public void setOrganizador(Usuario organizador) {
         this.organizador = organizador;
+    }
+
+    public Integer getDiasCancelarInscricao() {
+        return diasCancelarInscricao;
+    }
+
+    public void setDiasCancelarInscricao(Integer diasCancelarInscricao) {
+        this.diasCancelarInscricao = diasCancelarInscricao;
     }
 
     public ArrayList<Trabalho> getTrabalhos() {

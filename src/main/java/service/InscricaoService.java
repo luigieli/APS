@@ -10,8 +10,6 @@ import repository.UsuarioRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class InscricaoService {
     InscricaoRepository inscricaoRepository;
@@ -49,6 +47,7 @@ public class InscricaoService {
     public Boolean cancelarInscricao(Evento evento, Usuario usuario) throws Exception{
         var inscricaoOptional = inscricaoRepository.getByUserIdAndEventId(evento.getIdEvento(), usuario.getIdUsuario());
         if(inscricaoOptional.isEmpty()) throw new Exception("Você não está inscrito para o evento: " + evento.getNome());
+        if(LocalDate.now().isAfter(evento.getDataInicio().minusDays(evento.getDiasCancelarInscricao()))) throw new Exception("Prazo para cancelar inscrição já encerrou.");
         var inscricaoFound = inscricaoOptional.get();
         evento.getInscricoes().removeIf(i -> i.getIdInscricao().equals(inscricaoFound.getIdInscricao()));
         evento.setCapacidadeAtual(evento.getInscricoes().size()-1);

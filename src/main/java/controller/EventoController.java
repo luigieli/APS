@@ -67,7 +67,8 @@ public class EventoController {
                 (LocalDate) eventoBuilder.get(3),
                 (Endereco) eventoBuilder.get(4),
                 (Integer) eventoBuilder.get(5),
-                (LocalDate) eventoBuilder.get(6)
+                (LocalDate) eventoBuilder.get(6),
+                (Integer) eventoBuilder.get(7)
         );
         new EventoService().createEvent(Session.getLoggedInUsuario(),evento);
     }
