@@ -24,16 +24,21 @@ public class InscricaoService {
     }
 
     public Boolean realizarInscricao(Evento evento, Usuario usuario) throws Exception{
-        if(evento.getCapacidadeAtual().equals(evento.getCapacidadeMax())) throw new Exception("Capacidade máxima atingida.");
+        if(evento.getCapacidadeAtual() >= (evento.getCapacidadeMax())) throw new Exception("Capacidade máxima atingida.");
         var data = LocalDate.now();
         if(data.isAfter(evento.getDataInicio())) throw new Exception("Prazo para inscrição já acabou.");
-        inscricaoRepository.create(new Inscricao(
+        Inscricao inscricao = new Inscricao(
                 data,
                 "INSCRITO",
                 evento,
                 usuario
-        ));
+        );
         evento.setCapacidadeAtual(evento.getCapacidadeAtual()+1);
+        evento.getInscricoes().add(inscricao);
+        usuario.getInscricoes().add(inscricao);
+        inscricaoRepository.create(inscricao);
+        usuarioRepository.update(usuario);
+        eventoRepository.update(evento);
         return true;
     }
 
@@ -41,12 +46,12 @@ public class InscricaoService {
         var inscricaoOptional = inscricaoRepository.getByUserIdAndEventId(evento.getIdEvento(), usuario.getIdUsuario());
         if(inscricaoOptional.isEmpty()) throw new Exception("Você não está inscrito para o evento: " + evento.getNome());
         var inscricaoFound = inscricaoOptional.get();
-        inscricaoRepository.delete(inscricaoFound.getIdInscricao());
         evento.getInscricoes().removeIf(i -> i.getIdInscricao().equals(inscricaoFound.getIdInscricao()));
-        eventoRepository.update(evento);
+        evento.setCapacidadeAtual(evento.getInscricoes().size()-1);
         usuario.getInscricoes().removeIf(i -> i.getIdInscricao().equals(inscricaoFound.getIdInscricao()));
+        eventoRepository.update(evento);
         usuarioRepository.update(usuario);
-        return true;
+        return inscricaoRepository.delete(inscricaoFound.getIdInscricao());
     }
 
     public ArrayList<Inscricao> visualizarInscritosNoEvento(Evento evento){
