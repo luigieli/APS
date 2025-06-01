@@ -3,12 +3,12 @@ package service;
 import app.Database;
 import app.Session;
 import model.Evento;
-import model.Inscricao;
 import model.Trabalho;
 import model.Usuario;
 import repository.TrabalhoRepository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class TrabalhoService {
     private TrabalhoRepository trabalhoRepository;
@@ -28,5 +28,9 @@ public class TrabalhoService {
         trabalho.setInscricao(inscricaoFound);
         trabalho.setStatus("SUBMETIDO");
         return trabalhoRepository.create(trabalho);
+    }
+
+    public ArrayList<Trabalho> getAllTrabalhosMadeByMe(Usuario usuario){
+        return trabalhoRepository.getAllTrabalhosByUserId(usuario.getIdUsuario());
     }
 }
