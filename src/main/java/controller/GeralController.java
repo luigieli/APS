@@ -18,7 +18,7 @@ public class GeralController {
             new UsuarioController().cadastrar();
             homeScreen();
         }else{
-            System.out.println("COMANDO INVÁLIDO!!!");
+            System.err.println("COMANDO INVÁLIDO!!!");
             homeScreen();
         }
 
