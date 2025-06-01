@@ -112,6 +112,10 @@ public class EventoVisao extends TemplateVisao{
         clearScreen();
         ArrayList<Inscricao> presents = new ArrayList<>();
         System.out.println("###################################");
+        if(inscritos.isEmpty()){
+            System.out.println("NENHUM PARTICIPANTE SE INSCREVEU PARA ESSE EVENTO.");
+            return "0";
+        }
         for(int i=0; i < inscritos.size(); i++){
             System.out.println("-----------------------------------");
             System.out.println((i+1) + " - Inscrito: " + inscritos.get(i).getUsuario().getNomeCompleto());
@@ -125,6 +129,7 @@ public class EventoVisao extends TemplateVisao{
     public Evento renderMyEventsView(ArrayList<Evento> eventos){
         clearScreen();
         System.out.println("###################################");
+        System.out.println("Seus Eventos");
         for(int i=0; i < eventos.size(); i++){
             System.out.println("-----------------------------------");
             System.out.println((i + 1) + " - Nome: " + eventos.get(i).getNome());
