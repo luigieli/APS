@@ -40,6 +40,11 @@ public class Usuario {
         this.nomeCompleto = nomeCompleto;
         this.instituicao = instituicao;
         this.email = email;
+        this.inscricoes = new ArrayList<>();
+        this.eventosOrganizados = new ArrayList<>();
+        this.avalicoesFeitas = new ArrayList<>();
+        this.certificados = new ArrayList<>();
+        this.trabalhos = new ArrayList<>();
     }
 
     public ArrayList<Inscricao> getInscricoes() {

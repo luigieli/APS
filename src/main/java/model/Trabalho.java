@@ -37,6 +37,8 @@ public class Trabalho {
         this.titulo = titulo;
         this.tipo = tipo;
         this.arquivo = arquivo;
+        this.certificados = new ArrayList<>();
+        this.avaliacoes = new ArrayList<>();
     }
 
     public Evento getEvento() {
