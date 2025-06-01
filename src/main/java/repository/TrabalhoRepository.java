@@ -5,6 +5,7 @@ import model.Trabalho;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class TrabalhoRepository implements RepositoryTemplate<Trabalho>{
     private ArrayList<Trabalho> trabalhos;
@@ -47,5 +48,11 @@ public class TrabalhoRepository implements RepositoryTemplate<Trabalho>{
     @Override
     public Boolean create(Trabalho trabalho) {
         return this.trabalhos.add(trabalho);
+    }
+
+    public ArrayList<Trabalho> getAllTrabalhosByUserId(UUID userId){
+        return (ArrayList<Trabalho>) trabalhos.stream()
+                .filter(t -> t.getInscricao().getUsuario().getIdUsuario().equals(userId))
+                .collect(Collectors.toList());
     }
 }
