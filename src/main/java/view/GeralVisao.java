@@ -18,13 +18,10 @@ public class GeralVisao extends TemplateVisao{
     public Integer renderHomeLoggedScreenView(){
         System.out.println("###################################");
         System.out.println("1 - Visualizar lista de eventos disponíveis");
-        System.out.println("2 - Submeter Trabalho");
-        System.out.println("3 - Cadastrar novo evento");
-        System.out.println("4 - Gerenciar inscrições do evento");
-        System.out.println("5 - Designar avaliadores para trabalhos");
-        System.out.println("6 - Registrar avaliação de trabalho");
-        System.out.println("7 - Emitir certificado de participação");
-        System.out.println("8 - Emitir certificado de apresentação");
+        System.out.println("2 - Cadastrar novo evento");
+        System.out.println("3 - Gerenciar meus eventos");
+        System.out.println("4 - Emitir certificado de participação");
+        System.out.println("5 - Emitir certificado de apresentação");
         System.out.println("###################################");
         return scanner.nextInt();
     }

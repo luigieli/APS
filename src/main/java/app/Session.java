@@ -3,17 +3,32 @@ package app;
 import model.Usuario;
 
 public class Session {
-    private Usuario usuarioSession;
+    private static Usuario usuario;
+
+
+    public static Usuario getInstance(Usuario usuario) {
+        if (usuario == null) {
+            Session.usuario = usuario;
+        }
+        return Session.usuario;
+    }
+
+    public static Usuario getUsuarioInstance() throws Exception{
+        if (usuario == null) {
+            throw new Exception("Você não está logado.");
+        }
+        return Session.usuario;
+    }
 
     public Session(Usuario usuario) {
-        this.usuarioSession = usuario;
+        Session.usuario = usuario;
     }
 
-    public void setUsuarioSession(Usuario usuario) {
-        this.usuarioSession = usuario;
+    public void setUsuario(Usuario usuario) {
+        Session.usuario = usuario;
     }
 
-    public Usuario getUsuarioSession() {
-        return usuarioSession;
+    public Usuario getUsuario() {
+        return usuario;
     }
 }
