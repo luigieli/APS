@@ -17,11 +17,12 @@ public class EventoVisao extends TemplateVisao{
     }
 
     public Evento renderAllEvents(ArrayList<Evento> eventos){
+        clearScreen();
         System.out.println("Eventos:");
         System.out.println("###################################");
         for(int i=0; i < eventos.size(); i++){
             System.out.println("-----------------------------------");
-            System.out.println("Opção: " + i+1);
+            System.out.println("Opção: " + ((int)i+1));
             System.out.println("Nome: " + eventos.get(i).getNome());
             System.out.println("Descrição: " + eventos.get(i).getDescricao());
             System.out.println("Data de início do evento: " + eventos.get(i).getDataInicio());
@@ -43,6 +44,7 @@ public class EventoVisao extends TemplateVisao{
     }
 
     public Integer renderEventView(Evento evento){
+        clearScreen();
         System.out.println("###################################");
         System.out.println("-----------------------------------");
         System.out.println("Nome: " + evento.getNome());
@@ -67,41 +69,45 @@ public class EventoVisao extends TemplateVisao{
     }
 
     public ArrayList<Object> renderCreateEventView(){
+        clearScreen();
         System.out.println("###################################");
         System.out.println("Insira o nome do evento: ");
-        var nome = scanner.next();
+        var nome = scanner.nextLine();
         System.out.println("Insira a descrição do evento: ");
-        var descricao = scanner.next();
+        var descricao = scanner.nextLine();
         System.out.println("Insira a quantidade máxima de participantes: ");
         Integer capacidadeMax = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Insira a data de início do evento (DD/MM/YYYY): ");
-        var dataInicioStr = scanner.next();
+        var dataInicioStr = scanner.nextLine();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         var dataInicio = LocalDate.parse(dataInicioStr,formatter);
         System.out.println("Insira a data de término do evento (DD/MM/YYYY): ");
-        var dataFimStr = scanner.next();
+        var dataFimStr = scanner.nextLine();
         var dataFim = LocalDate.parse(dataFimStr,formatter);
         System.out.println("Insira o prazo máximo para submeter trabalhos (DD/MM/YYYY): ");
-        var dataTrabStr = scanner.next();
+        var dataTrabStr = scanner.nextLine();
         var dataTrab = LocalDate.parse(dataTrabStr, formatter);
         System.out.println("Insira o CEP de onde será o evento: ");
-        var cep = scanner.next();
+        var cep = scanner.nextLine();
         System.out.println("Insira a UF de onde será o evento: ");
-        var uf = scanner.next();
+        var uf = scanner.nextLine();
         System.out.println("Insira a cidade de onde será o evento: ");
-        var cidade = scanner.next();
+        var cidade = scanner.nextLine();
         System.out.println("Insira o bairro de onde será o evento: ");
-        var bairro = scanner.next();
+        var bairro = scanner.nextLine();
         System.out.println("Insira a rua de onde será o evento: ");
-        var rua = scanner.next();
+        var rua = scanner.nextLine();
         System.out.println("Insira o número do logradouro de onde será o evento: ");
         Integer numero = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("###################################");
         Endereco endereco = new Endereco(numero,rua,cidade,bairro,uf,cep);
         return new ArrayList<>(Arrays.asList(nome, descricao, dataInicio, dataFim, endereco, capacidadeMax, dataTrab));
     }
 
     public String renderSubscribedView(ArrayList<Inscricao> inscritos){
+        clearScreen();
         ArrayList<Inscricao> presents = new ArrayList<>();
         System.out.println("###################################");
         for(int i=0; i < inscritos.size(); i++){
@@ -115,6 +121,7 @@ public class EventoVisao extends TemplateVisao{
     }
 
     public Evento renderMyEventsView(ArrayList<Evento> eventos){
+        clearScreen();
         System.out.println("###################################");
         for(int i=0; i < eventos.size(); i++){
             System.out.println("-----------------------------------");
@@ -135,6 +142,7 @@ public class EventoVisao extends TemplateVisao{
     }
 
     public Integer renderMyEventView(Evento evento){
+        clearScreen();
         System.out.println("###################################");
         System.out.println("-----------------------------------");
         System.out.println("Nome: " + evento.getNome());
@@ -150,6 +158,7 @@ public class EventoVisao extends TemplateVisao{
         System.out.println("###################################");
         System.out.println("1 - Lançar Presenca");
         System.out.println("2 - Designar Avaliador");
+        System.out.println("3 - Atualizar Evento");
         System.out.println("0 - VOLTAR.");
         System.out.println("###################################");
         System.out.print("Selecione a opção desejada: ");
@@ -157,6 +166,7 @@ public class EventoVisao extends TemplateVisao{
     }
 
     public HashMap<String,String> renderUpdateEventView(Evento evento){
+        clearScreen();
         HashMap<String, String> choice = new HashMap<>();
         Integer option;
         String optionChosen;
@@ -191,6 +201,8 @@ public class EventoVisao extends TemplateVisao{
             System.out.println("###################################");
             System.out.println("Digite o número do campo que deseja alterar: (0 - para SAIR)");
             option = scanner.nextInt();
+            scanner.nextLine();
+            if (option == 0) break;
             System.out.println("Digite o novo valor do campo: ");
             optionChosen = scanner.nextLine();
             if(option == 1){
@@ -229,12 +241,12 @@ public class EventoVisao extends TemplateVisao{
             else if(option == 12){
                 choice.put("Numero",optionChosen);
             }
-            else if (option == 0) break;
         }
         return choice;
     }
 
     public String renderSelectAppraiserView(Evento evento){
+        clearScreen();
         System.out.println("###################################");
         System.out.println("Designar avaliador para evento: " + evento.getNome());
         System.out.println("###################################");
@@ -243,6 +255,7 @@ public class EventoVisao extends TemplateVisao{
     }
 
     public Trabalho renderGetAllWorksView(Evento evento){
+        clearScreen();
         System.out.println("###################################");
         for(int i=0; i < evento.getTrabalhos().size(); i++){
             System.out.println("-----------------------------------");

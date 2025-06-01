@@ -11,6 +11,7 @@ public class CertificadoVisao extends GeralVisao{
     }
 
     public Evento renderAllSubscribedEventsPresentView(ArrayList<Evento> eventos){
+        clearScreen();
         System.out.println("###################################");
         System.out.println("Eventos em que você esteve presente:");
         for(int i=0; i < eventos.size(); i++){
@@ -21,11 +22,13 @@ public class CertificadoVisao extends GeralVisao{
         System.out.println("###################################");
         System.out.println("Insira qual evento deseja gerar o certificado: (0 - SAIR)");
         var choice = scanner.nextInt();
+        scanner.nextLine();
         if(choice==0) return null;
         return eventos.get(choice-1);
     }
 
     public Trabalho renderAllWorksShowView(ArrayList<Trabalho> trabalhos){
+        clearScreen();
         System.out.println("###################################");
         System.out.println("Trabalhos que você apresentou:");
         for (int i=0; i< trabalhos.size(); i++){
@@ -37,6 +40,7 @@ public class CertificadoVisao extends GeralVisao{
         System.out.println("###################################");
         System.out.println("Insira qual trabalho deseja gerar o certificado: (0 - SAIR)");
         var choice = scanner.nextInt();
+        scanner.nextLine();
         if(choice==0) return null;
         return trabalhos.get(choice-1);
     }

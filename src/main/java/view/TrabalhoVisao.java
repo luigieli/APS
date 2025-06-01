@@ -12,19 +12,22 @@ public class TrabalhoVisao extends TemplateVisao{
     }
 
     public ArrayList<String> renderSubmitView(){
+        clearScreen();
         System.out.println("###################################");
         System.out.println("Submissão de Trabalho");
         System.out.println("###################################");
         System.out.println("Insira o URL do trabalho: ");
         var url = scanner.next();
+        scanner.nextLine();
         System.out.println("Insira o título do trabalho: ");
-        var titulo = scanner.next();
+        var titulo = scanner.nextLine();
         System.out.println("Insira o tipo de trabalho: ");
-        var tipo = scanner.next();
-        return (ArrayList<String>) Arrays.asList(titulo, tipo, url);
+        var tipo = scanner.nextLine();
+        return new ArrayList<>(Arrays.asList(titulo, tipo, url));
     }
 
     public ArrayList<Object> renderSetAvaliacao(Trabalho trabalho){
+        clearScreen();
         System.out.println("###################################");
         System.out.println("Avaliação de Trabalho");
         System.out.println("Trabalho: " + trabalho.getTitulo());
