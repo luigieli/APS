@@ -3,17 +3,20 @@ package service;
 import app.Database;
 import model.Certificado;
 import model.Evento;
+import model.Trabalho;
 import model.Usuario;
 import repository.CertificadoRepository;
+import repository.TrabalhoRepository;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 public class CertificadoService {
     CertificadoRepository certificadoRepository;
-
+    TrabalhoRepository trabalhoRepository;
     public CertificadoService() {
         this.certificadoRepository = Database.getInstance().getCertificadoRepository();
+        this.trabalhoRepository = Database.getInstance().getTrabalhoRepository();
     }
 
     public String generateCertifyCode(){
@@ -22,5 +25,12 @@ public class CertificadoService {
 
     public Boolean generatePresenceCertificate(Evento evento, Usuario usuario){
         return certificadoRepository.create(new Certificado("PRESENÇA", generateCertifyCode(), evento.getDataInicio(), usuario, evento));
+    }
+
+    public Boolean generateWorkShowCertificate(Trabalho trabalho, Evento evento, Usuario usuario){
+        var certificado = new Certificado("APRESENTAÇÃO",generateCertifyCode(),evento.getDataInicio(),usuario,evento,trabalho);
+        trabalho.getCertificados().add(certificado);
+        trabalhoRepository.update(trabalho);
+        return certificadoRepository.create(certificado);
     }
 }

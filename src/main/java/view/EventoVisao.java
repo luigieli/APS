@@ -59,6 +59,7 @@ public class EventoVisao extends TemplateVisao{
         System.out.println("1 - Realizar inscrição");
         System.out.println("2 - Submeter trabalho");
         System.out.println("3 - Cancelar inscrição");
+        System.out.println("4 - Registrar avaliação de trabalho");
         System.out.println("0 - VOLTAR.");
         System.out.println("###################################");
         System.out.print("Selecione a opção desejada: ");
