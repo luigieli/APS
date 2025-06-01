@@ -13,8 +13,10 @@ public class GeralController {
 
         if(choice == 1){
             new UsuarioController().login();
+            loggedHomeScreen();
         }else if(choice == 2){
             new UsuarioController().cadastrar();
+            homeScreen();
         }else{
             System.out.println("COMANDO INVÁLIDO!!!");
             homeScreen();
@@ -23,28 +25,29 @@ public class GeralController {
     }
 
     public void loggedHomeScreen(){
-        var choice = interfaceGeral.renderHomeLoggedScreenView();
-        switch (choice){
-            case 1 -> {
-                new EventoController().getAllEvents();
-            }
-            case 2 -> {
-                try{
-                    new EventoController().createEvent();
-                }catch (Exception e){
-                    System.out.println(e.getMessage());
+        while (true){
+            var choice = interfaceGeral.renderHomeLoggedScreenView();
+            switch (choice){
+                case 1 -> {
+                    new EventoController().getAllEvents();
+                }
+                case 2 -> {
+                    try{
+                        new EventoController().createEvent();
+                    }catch (Exception e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+                case 3 -> {
+                    new EventoController().getAllMyEvents();
+                }
+                case 4 -> {
+                    new CertificadoController().getParticipationCertificate();
+                }
+                case 5 -> {
+                    new CertificadoController().getWorkApresentationCertificate();
                 }
             }
-            case 3 -> {
-                new EventoController().getAllMyEvents();
-            }
-            case 4 -> {
-                new CertificadoController().getParticipationCertificate();
-            }
-            case 5 -> {
-                new CertificadoController().getWorkApresentationCertificate();
-            }
-
         }
     }
 

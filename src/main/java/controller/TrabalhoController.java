@@ -19,7 +19,7 @@ public class TrabalhoController {
                     evento
             );
         }catch (Exception e){
-            e.getMessage(); // TODO: TRATAR EXIBIÇÃO DE MENSAGENS DE ERRO NA INTERFACE
+            System.err.println(e.getMessage()); // TODO: TRATAR EXIBIÇÃO DE MENSAGENS DE ERRO NA INTERFACE
         }
 
     }
